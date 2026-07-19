@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: capstone
+  namespace: argocd
+spec:
+  description: Capstone GitOps project
+  sourceRepos:
+    - "https://github.com/eaibrahim32/*"
+  destinations:
+    - namespace: "staging"
+      server: https://kubernetes.default.svc
+    - namespace: "prod"
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"

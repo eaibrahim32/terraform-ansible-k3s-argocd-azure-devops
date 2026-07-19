@@ -1,0 +1,15 @@
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars
+crash.log
+infra/terraform/.ssh/
+*.pem
+*_rsa
+*_rsa.pub
+infra/ansible/inventory.ini
+infra/ansible/artifacts/
+__pycache__/
+*.pyc
+.venv/

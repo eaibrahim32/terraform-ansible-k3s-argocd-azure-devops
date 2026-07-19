@@ -1,0 +1,13 @@
+# Multi-tenancy guardrail: caps what this namespace can consume.
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: app-quota
+  namespace: app
+spec:
+  hard:
+    requests.cpu: "1"
+    requests.memory: 1Gi
+    limits.cpu: "2"
+    limits.memory: 2Gi
+    pods: "20"

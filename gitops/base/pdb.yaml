@@ -1,0 +1,11 @@
+# Availability SLO: keep at least 1 pod during node drain / voluntary disruption.
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: app
+  namespace: app
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: app

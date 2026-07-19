@@ -1,0 +1,4 @@
+# Copy to terraform.tfvars and fill in. terraform.tfvars is gitignored.
+allowed_ssh_cidr = "REPLACE_WITH_YOUR_IP/32"
+alert_email      = "you@example.com"
+budget_amount    = 20

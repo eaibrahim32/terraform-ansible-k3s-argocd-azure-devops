@@ -1,0 +1,22 @@
+# GitOps: Argo CD watches the repo and auto-syncs staging. Git is the source of truth.
+# You stop running `kubectl apply` -> you `git push`.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-staging
+  namespace: argocd
+spec:
+  project: capstone
+  source:
+    repoURL: https://github.com/eaibrahim32/terraform-ansible-k3s-argocd-azure-devops.git
+    targetRevision: main
+    path: gitops/overlays/staging
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

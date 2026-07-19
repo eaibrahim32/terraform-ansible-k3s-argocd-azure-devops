@@ -1,0 +1,63 @@
+name: build-scan-push
+
+on:
+  push:
+    branches: [main]
+    paths: ["app/**", ".github/workflows/ci.yml"]
+  pull_request:
+    paths: ["app/**"]
+
+permissions:
+  contents: write
+  id-token: write
+
+env:
+  IMAGE: app
+
+jobs:
+  build-scan-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image (SHA-tagged, never :latest in prod)
+        run: docker build -t $IMAGE:${{ github.sha }} ./app
+
+      - name: Trivy scan (gate on HIGH/CRITICAL)
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          image-ref: ${{ env.IMAGE }}:${{ github.sha }}
+          format: table
+          exit-code: "1"
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+
+      - name: Azure login (OIDC)
+        if: github.ref == 'refs/heads/main'
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Push to ACR
+        if: github.ref == 'refs/heads/main'
+        run: |
+          az acr login --name ${{ secrets.ACR_NAME }}
+          LOGIN_SERVER=$(az acr show -n ${{ secrets.ACR_NAME }} --query loginServer -o tsv)
+          docker tag $IMAGE:${{ github.sha }} $LOGIN_SERVER/$IMAGE:${{ github.sha }}
+          docker tag $IMAGE:${{ github.sha }} $LOGIN_SERVER/$IMAGE:staging-latest
+          docker push $LOGIN_SERVER/$IMAGE:${{ github.sha }}
+          docker push $LOGIN_SERVER/$IMAGE:staging-latest
+
+      - name: Update staging image tag (GitOps)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          LOGIN_SERVER=$(az acr show -n ${{ secrets.ACR_NAME }} --query loginServer -o tsv)
+          cd gitops/overlays/staging
+          sed -i "s|newName:.*|newName: $LOGIN_SERVER/app|" kustomization.yaml
+          sed -i "s|newTag:.*|newTag: ${{ github.sha }}|" kustomization.yaml
+          git config user.name "ci-bot"
+          git config user.email "ci@capstone"
+          git commit -am "ci: bump staging image to ${{ github.sha }}" || echo "no change"
+          git push

@@ -1,0 +1,4 @@
+# Copy to inventory.ini (gitignored) and fill VM_PUBLIC_IP from terraform output.
+# Terraform wrote the key to ../terraform/.ssh/id_rsa
+[cluster]
+capstone ansible_host=VM_PUBLIC_IP ansible_user=azureuser ansible_ssh_private_key_file=../terraform/.ssh/id_rsa

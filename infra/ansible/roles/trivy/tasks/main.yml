@@ -1,0 +1,12 @@
+---
+- name: Check trivy
+  ansible.builtin.stat:
+    path: /usr/local/bin/trivy
+  register: trivy_bin
+
+- name: Install trivy
+  ansible.builtin.shell: |
+    curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+  args:
+    creates: /usr/local/bin/trivy
+  when: not trivy_bin.stat.exists

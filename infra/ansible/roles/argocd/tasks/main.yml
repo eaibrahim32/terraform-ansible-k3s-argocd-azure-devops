@@ -1,0 +1,31 @@
+---
+- name: Create argocd namespace
+  ansible.builtin.command: k3s kubectl create namespace argocd
+  register: ns
+  changed_when: "'created' in ns.stdout"
+  failed_when: ns.rc != 0 and 'AlreadyExists' not in ns.stderr
+
+- name: Install Argo CD
+  ansible.builtin.shell: |
+    k3s kubectl apply -n argocd \
+      -f https://raw.githubusercontent.com/argoproj/argo-cd/{{ argocd_version }}/manifests/install.yaml
+  register: argo_apply
+  changed_when: "'created' in argo_apply.stdout or 'configured' in argo_apply.stdout"
+
+- name: Wait for Argo CD server rollout
+  ansible.builtin.command: k3s kubectl -n argocd rollout status deploy/argocd-server --timeout=180s
+  changed_when: false
+
+- name: Read initial admin password
+  ansible.builtin.shell: |
+    k3s kubectl -n argocd get secret argocd-initial-admin-secret \
+      -o jsonpath="{.data.password}" | base64 -d
+  register: argo_pw
+  changed_when: false
+
+- name: Show Argo CD access instructions
+  ansible.builtin.debug:
+    msg:
+      - "Argo CD installed. Access via SSH tunnel (NOT exposed publicly):"
+      - "  kubectl -n argocd port-forward svc/argocd-server 8080:443"
+      - "  user: admin  password: {{ argo_pw.stdout }}"

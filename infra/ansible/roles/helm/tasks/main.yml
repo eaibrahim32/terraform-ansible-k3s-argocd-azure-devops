@@ -1,0 +1,39 @@
+---
+- name: Check helm
+  ansible.builtin.stat:
+    path: /usr/local/bin/helm
+  register: helm_bin
+
+- name: Install helm
+  ansible.builtin.shell: |
+    curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+  args:
+    creates: /usr/local/bin/helm
+  when: not helm_bin.stat.exists
+
+- name: Add prometheus-community repo
+  ansible.builtin.command: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+  environment:
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+  register: repo_add
+  changed_when: "'has been added' in repo_add.stdout"
+  failed_when: repo_add.rc != 0 and 'already exists' not in repo_add.stderr
+
+- name: helm repo update
+  ansible.builtin.command: helm repo update
+  environment:
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+  changed_when: false
+
+- name: Install kube-prometheus-stack (Prometheus + Grafana + Alertmanager)
+  ansible.builtin.command: >
+    helm upgrade --install monitoring prometheus-community/kube-prometheus-stack
+    --namespace monitoring --create-namespace
+    --version {{ prometheus_stack_version }}
+    --set grafana.adminPassword=admin
+    --set prometheus.prometheusSpec.resources.requests.cpu=100m
+    --set prometheus.prometheusSpec.resources.requests.memory=256Mi
+  environment:
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+  register: mon_install
+  changed_when: "'has been upgraded' in mon_install.stdout or 'STATUS: deployed' in mon_install.stdout"

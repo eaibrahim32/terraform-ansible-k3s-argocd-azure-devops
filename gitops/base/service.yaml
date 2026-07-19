@@ -1,0 +1,15 @@
+# type: LoadBalancer -> on k3s, klipper (servicelb) fulfills this on the node IP.
+# In production this maps to an Azure Load Balancer fronting a VMSS.
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  namespace: app
+spec:
+  type: LoadBalancer
+  selector:
+    app: app
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080

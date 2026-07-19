@@ -1,0 +1,20 @@
+# L7 routing via Traefik (bundled with k3s). Service/LoadBalancer is L4;
+# Ingress adds host/path routing on top.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app
+  namespace: app
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app
+                port:
+                  number: 80

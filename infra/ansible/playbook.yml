@@ -1,0 +1,16 @@
+---
+# Configuration layer. Terraform PROVISIONS the box; Ansible CONFIGURES it.
+# Agentless over SSH, fully idempotent -> re-running proves zero drift.
+- name: Configure capstone cluster node
+  hosts: cluster
+  gather_facts: true
+
+  vars:
+    argocd_version: "v2.12.4"
+    prometheus_stack_version: "62.3.0"
+
+  roles:
+    - k3s      # lightweight kubernetes (no AKS control-plane fee)
+    - helm     # package manager for cluster add-ons
+    - trivy    # image scanning available on-node
+    - argocd   # GitOps engine
