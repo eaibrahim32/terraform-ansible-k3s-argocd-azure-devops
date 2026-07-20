@@ -64,4 +64,6 @@ See docs/architecture.md for the ADR and docs/requirement-map.md for the
 requirement mapping and the live-vs-designed split.
 
 <img width="1024" height="220" alt="image" src="https://github.com/user-attachments/assets/51030bb2-ffd8-40fe-a499-8c2d96cf1bc2" />
+<img width="1271" height="817" alt="image" src="https://github.com/user-attachments/assets/6102368d-6bcb-43c3-853b-92a0fb64064b" />
+
 
