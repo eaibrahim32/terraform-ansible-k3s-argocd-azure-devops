@@ -30,4 +30,4 @@ patches:
 images:
   - name: app
     newName: app
-    newTag: v2
+    newTag: v3
