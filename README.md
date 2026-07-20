@@ -62,3 +62,6 @@ Access Argo CD and Grafana via kubectl port-forward, never exposed publicly.
 
 See docs/architecture.md for the ADR and docs/requirement-map.md for the
 requirement mapping and the live-vs-designed split.
+
+<img width="1024" height="220" alt="image" src="https://github.com/user-attachments/assets/51030bb2-ffd8-40fe-a499-8c2d96cf1bc2" />
+
