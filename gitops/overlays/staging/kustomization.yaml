@@ -29,5 +29,5 @@ patches:
         value: 3
 images:
   - name: app
-    newName: REPLACE_ACR_LOGIN_SERVER/app
-    newTag: staging-latest
+    newName: app
+    newTag: v1
