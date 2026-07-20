@@ -24,6 +24,9 @@ spec:
         prometheus.io/port: "8080"
     spec:
       serviceAccountName: app-sa
+      volumes:
+        - name: tmp
+          emptyDir: {}
       securityContext:
         runAsNonRoot: true
         runAsUser: 65532
@@ -68,3 +71,6 @@ spec:
             readOnlyRootFilesystem: true
             capabilities:
               drop: ["ALL"]
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
