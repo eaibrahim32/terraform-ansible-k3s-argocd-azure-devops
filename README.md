@@ -69,6 +69,10 @@ requirement mapping and the live-vs-designed split.
 <img width="1898" height="964" alt="image" src="https://github.com/user-attachments/assets/1f967bcd-2262-4cfc-b4be-8ec15bf4f8ee" />
 <img width="1469" height="928" alt="image" src="https://github.com/user-attachments/assets/9af8f961-d21c-4733-bc60-c526aa00837a" />
 <img width="1913" height="266" alt="image" src="https://github.com/user-attachments/assets/833fca2c-8d5b-4deb-a663-e20f57d26f7c" />
+<img width="1920" height="224" alt="image" src="https://github.com/user-attachments/assets/e1fce6c6-9bde-4827-96a2-889f1f298066" />
+<img width="1033" height="497" alt="image" src="https://github.com/user-attachments/assets/fb897d3c-33d9-43f1-9912-f96af07b42b6" />
+
+
 
 
 
