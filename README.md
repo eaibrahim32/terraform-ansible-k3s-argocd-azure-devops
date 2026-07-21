@@ -74,6 +74,28 @@ requirement mapping and the live-vs-designed split.
 <img width="1640" height="847" alt="image" src="https://github.com/user-attachments/assets/9e8e584a-997c-4d67-9ff4-024ee33f80eb" />
 <img width="1606" height="865" alt="image" src="https://github.com/user-attachments/assets/435654ac-c427-4880-8e99-11d78ac9eabd" />
 <img width="1888" height="834" alt="image" src="https://github.com/user-attachments/assets/5ccce341-eda2-4a13-82d0-08ce26ffac18" />
+<img width="1861" height="847" alt="image" src="https://github.com/user-attachments/assets/db84326c-7a29-4fa5-8f24-b32043e3193a" />
+<img width="1887" height="590" alt="image" src="https://github.com/user-attachments/assets/6256f235-df1e-406c-86c9-476f0a383b50" />
+<img width="1868" height="579" alt="image" src="https://github.com/user-attachments/assets/63edec0f-78ee-4a83-be5f-dc2eef64b046" />
+<img width="1530" height="566" alt="image" src="https://github.com/user-attachments/assets/dab3f956-6ac8-449a-9f0f-fd789614ccee" />
+<img width="1607" height="651" alt="image" src="https://github.com/user-attachments/assets/ec9c5a74-25cf-411b-bd54-6d1c455af745" />
+<img width="1605" height="646" alt="image" src="https://github.com/user-attachments/assets/27a1363d-d0ca-4045-b713-d3dfad10fbb5" />
+<img width="1884" height="842" alt="image" src="https://github.com/user-attachments/assets/37b1ccf6-1173-466a-9d2d-60a8723af126" />
+<img width="1888" height="632" alt="image" src="https://github.com/user-attachments/assets/0825b225-4150-4495-9d5e-9f336fb3b7e0" />
+<img width="1869" height="673" alt="image" src="https://github.com/user-attachments/assets/b14cfce0-91e0-4ac3-98fd-a2f9127e7033" />
+<img width="1907" height="672" alt="image" src="https://github.com/user-attachments/assets/982eafab-083b-403c-82d9-08f01cd13ba6" />
+<img width="1905" height="864" alt="image" src="https://github.com/user-attachments/assets/787d65cb-65c6-430d-a623-b2a77e04f2fc" />
+
+
+
+
+
+
+
+
+
+
+
 
 
 
