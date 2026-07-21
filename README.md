@@ -109,3 +109,5 @@ Cost was a design decision, not an afterthought:
 | **Project total** | **~$1.34** |
 
 > Note: The Azure billing account shows a slightly higher total ($1.72) because it includes an unrelated Azure SQL Database charge from a separate resource on the same subscription. That SQL resource is **not part of this project** — this project provisions no database — so it is excluded from the cost above.
+> <img width="1431" height="608" alt="image" src="https://github.com/user-attachments/assets/ffa8c62e-4712-4a0f-b31d-7095ffef9e44" />
+
