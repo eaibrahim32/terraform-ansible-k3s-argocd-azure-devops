@@ -133,4 +133,6 @@ Cost was a design decision, not an afterthought:
 <img width="1869" height="673" alt="image" src="https://github.com/user-attachments/assets/b14cfce0-91e0-4ac3-98fd-a2f9127e7033" />
 <img width="1907" height="672" alt="image" src="https://github.com/user-attachments/assets/982eafab-083b-403c-82d9-08f01cd13ba6" />
 <img width="1905" height="864" alt="image" src="https://github.com/user-attachments/assets/787d65cb-65c6-430d-a623-b2a77e04f2fc" />
+<img width="1919" height="874" alt="image" src="https://github.com/user-attachments/assets/9051af7c-a3d1-44dd-a8ac-3459d9383ab9" />
+
 
