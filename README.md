@@ -85,3 +85,27 @@ requirement mapping and the live-vs-designed split.
 
 
 
+
+## Cost Optimization
+
+This project's infrastructure cost about **$1.34** end-to-end on Azure — a full
+Kubernetes cluster, container registry, Key Vault, monitoring, and networking —
+then torn down to $0 ongoing cost.
+
+Cost was a design decision, not an afterthought:
+
+- **k3s instead of AKS** — no managed control-plane fee (AKS adds ~$73/month just for the control plane). A full, certified Kubernetes cluster ran on a single billable VM.
+- **Single right-sized VM** — one burstable node instead of a multi-node cluster. The VM was the largest cost at ~$1.00.
+- **Basic-tier services** — Container Registry Basic, Standard_LRS storage, standard Key Vault: the lowest tier that met the need.
+- **Nightly auto-shutdown** — the VM powers off automatically so it never bills around the clock.
+- **Budget + alerts** — a monthly budget with email alerts at 80% and 100% as a backstop.
+- **terraform destroy when idle** — infrastructure is disposable and reproducible.
+
+| Service | Cost |
+|---|---|
+| Virtual Machine (D2s_v5, ~10 hrs) | $1.00 |
+| Container Registry (Basic) | $0.12 |
+| Storage, networking, Key Vault, monitoring | $0.22 |
+| **Project total** | **~$1.34** |
+
+> Note: The Azure billing account shows a slightly higher total ($1.72) because it includes an unrelated Azure SQL Database charge from a separate resource on the same subscription. That SQL resource is **not part of this project** — this project provisions no database — so it is excluded from the cost above.
