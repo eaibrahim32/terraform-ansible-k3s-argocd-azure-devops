@@ -63,30 +63,6 @@ Access Argo CD and Grafana via kubectl port-forward, never exposed publicly.
 See docs/architecture.md for the ADR and docs/requirement-map.md for the
 requirement mapping and the live-vs-designed split.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Cost Optimization
 
 This project's infrastructure cost about **$1.34** end-to-end on Azure — a full
@@ -135,19 +111,13 @@ Cost was a design decision, not an afterthought:
 <img width="1905" height="864" alt="image" src="https://github.com/user-attachments/assets/787d65cb-65c6-430d-a623-b2a77e04f2fc" />
 <img width="1919" height="874" alt="image" src="https://github.com/user-attachments/assets/9051af7c-a3d1-44dd-a8ac-3459d9383ab9" />
 
-
-
 ## GitOps Deployment (Argo CD)
 
 The application is deployed using GitOps. Argo CD watches the Git repository and automatically syncs the cluster to match it. Pushing a change to the manifests triggers a rollout — no manual `kubectl apply`. Staging auto-syncs; production is a manual sync.
 
-![Argo CD application tree](docs/screenshots/argocd-tree.png)
-
 ## Autoscaling & Elasticity (HPA)
 
 A HorizontalPodAutoscaler scales the app on CPU usage. Under load the deployment scaled from 1 to 3 pods, then back to 1 when load cleared — elasticity in both directions.
-
-![HPA scaling to 3 pods](docs/screenshots/hpa-scaling.png)
 
 ## Monitoring & Observability
 
@@ -157,15 +127,9 @@ Two layers:
 
 **Host metrics — Azure Monitor.** The VM sends host metrics and logs to a Log Analytics workspace, with a CPU alert.
 
-![Prometheus targets — all healthy](docs/screenshots/prometheus-targets.png)
-
-![Grafana dashboard — live cluster metrics](docs/screenshots/grafana-cluster-metrics.png)
-
 ## Secrets Management (Key Vault + Managed Identity)
 
 Secrets are never stored in code or config. The VM authenticates to Azure Key Vault using its managed identity (via IMDS) and reads the secret at runtime. The identity has a scoped, read-only Key Vault Secrets User role. No credentials anywhere.
-
-![Key Vault secret read via managed identity](docs/screenshots/keyvault-managed-identity.png)
 
 ## Cost Optimization
 
